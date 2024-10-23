@@ -23,6 +23,11 @@ spec:
           image: nginx:latest
           ports:
             - containerPort: 80
+          env:
+            - name: ENVIRONMENT
+              value: "development"  # Add your environment variable here
+            - name: LOG_LEVEL
+              value: "info"  # Another example variabl    
           livenessProbe:
             httpGet:
               path: /
