@@ -34,9 +34,6 @@ spec:
       initContainers:
         - name: init-script
           image: busybox
-          command: ["/bin/sh", "-c"]
-          args:
-            - cp /config/init-script.sh /etc/config/init-script.sh && chmod +x /etc/config/init-script.sh
           volumeMounts:
             - name: config-volume
               mountPath: /config
@@ -45,9 +42,6 @@ spec:
           image: nginx:latest
           ports:
             - containerPort: 80
-          command: ["/bin/sh", "-c"]
-          args:
-            - /etc/config/init-script.sh && exec nginx -g 'daemon off;'
           env:
             - name: ENVIRONMENT
               valueFrom:
