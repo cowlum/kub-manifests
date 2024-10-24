@@ -9,6 +9,19 @@ metadata:
   name: demo-app-config
   namespace: development
 data:
+  bob: "This is the content of the file bober."
+  ENVIRONMENT: "development"
+  LOG_LEVEL: "debug"
+  init-script.sh: |
+    #!/bin/sh
+    touch /etc/bober
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-app-config
+  namespace: development
+data:
   bob: "This is the content of the file bob."
   ENVIRONMENT: "development"
   LOG_LEVEL: "warn"
