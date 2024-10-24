@@ -16,19 +16,6 @@ data:
     #!/bin/sh
     touch /etc/bober
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: demo-app-config
-  namespace: development
-data:
-  bob: "This is the content of the file bob."
-  ENVIRONMENT: "development"
-  LOG_LEVEL: "warn"
-  init-script.sh: |
-    #!/bin/sh
-    touch /etc/config/bober
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
