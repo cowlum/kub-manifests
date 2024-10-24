@@ -3,16 +3,6 @@ kind: Namespace
 metadata:
   name: development
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: demo-app-config
-  namespace: development
-data:
-  bob: "This is the content of the file bob."
-  ENVIRONMENT: "development"
-  LOG_LEVEL: "info"
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
