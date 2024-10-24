@@ -50,6 +50,8 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config
+            - name: log-volume
+              mountPath: /var/log/nginx
           livenessProbe:
             httpGet:
               path: /
@@ -62,7 +64,19 @@ spec:
               port: 80
             initialDelaySeconds: 3
             periodSeconds: 3
+        - name: logging-sidecar
+          image: fluent/fluentd:v1.12-1
+          env:
+            - name: FLUENTD_CONF
+              value: "fluent.conf"
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log/nginx
+            - name: config-volume
+              mountPath: /etc/config
       volumes:
         - name: config-volume
           configMap:
             name: demo-app-config
+        - name: log-volume
+          emptyDir: {}
