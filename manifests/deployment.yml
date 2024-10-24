@@ -3,6 +3,14 @@ kind: Namespace
 metadata:
   name: development
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-app-config
+  namespace: development
+data:
+  bob: "This is the content of the file bob."
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,14 +33,22 @@ spec:
             - containerPort: 80
           env:
             - name: ENVIRONMENT
-              value: "development"  # Add your environment variable here
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-app-config
+                  key: ENVIRONMENT
             - name: LOG_LEVEL
-              value: "info"  # Another example variabl    
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-app-config
+                  key: LOG_LEVEL
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
           livenessProbe:
             httpGet:
               path: /
               port: 80
-              httpHeaders:
             initialDelaySeconds: 3
             periodSeconds: 3
           readinessProbe:
@@ -41,3 +57,7 @@ spec:
               port: 80
             initialDelaySeconds: 3
             periodSeconds: 3
+      volumes:
+        - name: config-volume
+          configMap:
+            name: demo-app-config
