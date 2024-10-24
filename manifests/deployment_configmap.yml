@@ -6,4 +6,4 @@ metadata:
 data:
   bob: "This is the content of the file bob."
   ENVIRONMENT: "development"
-  LOG_LEVEL: "info"
+  LOG_LEVEL: "warn"
