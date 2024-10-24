@@ -23,9 +23,6 @@ spec:
           image: nginx:latest
           ports:
             - containerPort: 80
-          command: ["/bin/sh", "-c"]
-          args:
-            - /usr/bin/touch ~/bober.text
           env:
             - name: ENVIRONMENT
               valueFrom:
