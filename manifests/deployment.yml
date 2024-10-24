@@ -34,9 +34,6 @@ spec:
                 configMapKeyRef:
                   name: demo-app-config
                   key: LOG_LEVEL
-          volumeMounts:
-            - name: config-volume
-              mountPath: /etc/config
           livenessProbe:
             httpGet:
               path: /
