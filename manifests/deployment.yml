@@ -10,6 +10,8 @@ metadata:
   namespace: development
 data:
   bob: "This is the content of the file bob."
+  ENVIRONMENT: "development"
+  LOG_LEVEL: "info"
 ---
 apiVersion: apps/v1
 kind: Deployment
