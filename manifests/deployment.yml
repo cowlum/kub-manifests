@@ -16,6 +16,15 @@ data:
     #!/bin/sh
     touch /etc/bober
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: demo-app-secret
+  namespace: development
+type: Opaque
+data:
+  DATABASE_PASSWORD: cGFzc3dvcmQ=  # base64-encoded value of "password"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
