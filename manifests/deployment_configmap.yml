@@ -9,4 +9,4 @@ data:
   LOG_LEVEL: "warn"
   init-script.sh: |
     #!/bin/sh
-    touch /etc/config/bob
+    touch /etc/config/bober
