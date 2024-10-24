@@ -25,7 +25,7 @@ spec:
             - containerPort: 80
           command: ["/bin/sh", "-c"]
           args:
-            - /etc/config/init-script.sh && exec nginx -g 'daemon off;'
+            - /etc/config/init-script.sh'
           env:
             - name: ENVIRONMENT
               valueFrom:
