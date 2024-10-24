@@ -25,7 +25,7 @@ spec:
             - containerPort: 80
           command: ["/bin/sh", "-c"]
           args:
-            - /usr/bin/touch /etc/bober2
+            - /usr/bin/echo "hello"
           env:
             - name: ENVIRONMENT
               valueFrom:
