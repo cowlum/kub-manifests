@@ -7,3 +7,6 @@ data:
   bob: "This is the content of the file bob."
   ENVIRONMENT: "development"
   LOG_LEVEL: "warn"
+  init-script.sh: |
+    #!/bin/sh
+    touch /etc/config/bob
