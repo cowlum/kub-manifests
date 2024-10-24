@@ -6,7 +6,7 @@ metadata:
 data:
   bob: "This is the content of the file bober."
   ENVIRONMENT: "development"
-  LOG_LEVEL: "warn"
+  LOG_LEVEL: "debug"
   init-script.sh: |
     #!/bin/sh
     touch /etc/bober
