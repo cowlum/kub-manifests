@@ -31,12 +31,6 @@ spec:
       labels:
         app: demo-app
     spec:
-      initContainers:
-        - name: init-script
-          image: busybox
-          volumeMounts:
-            - name: config-volume
-              mountPath: /config
       containers:
         - name: nginx
           image: nginx:latest
