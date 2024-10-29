@@ -78,19 +78,49 @@ spec:
               port: 80
             initialDelaySeconds: 3
             periodSeconds: 3
-        - name: logging-sidecar
-          image: fluent/fluentd:v1.12-1
-          env:
-            - name: FLUENTD_CONF
-              value: "fluent.conf"
-          volumeMounts:
-            - name: log-volume
-              mountPath: /var/log/nginx
-            - name: config-volume
-              mountPath: /etc/config
       volumes:
         - name: config-volume
           configMap:
             name: demo-app-config
         - name: log-volume
           emptyDir: {}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: "postgres"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: "your_username"
+        - name: POSTGRES_PASSWORD
+          value: "your_password"
+        - name: POSTGRES_DB
+          value: "your_database"
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-data
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
