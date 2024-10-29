@@ -60,7 +60,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: 1Gi
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -72,7 +72,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: mycluster218.home
+  - host: jenkins.mycluster218.home
     http:
       paths:
       - path: /
