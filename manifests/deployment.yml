@@ -72,7 +72,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: jenkins.your-domain.com
+  - host: mycluster.home
     http:
       paths:
       - path: /
