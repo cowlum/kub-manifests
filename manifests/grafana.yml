@@ -83,7 +83,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: grafana.local
+    - host: grafana.mycluster218
       http:
         paths:
           - path: /
