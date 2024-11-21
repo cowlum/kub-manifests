@@ -25,7 +25,3 @@ spec:
       # Optionally, set the path for the Ingress route (default is '/')
       path: /
       # If your Ingress controller requires SSL, enable TLS
-      tls:
-        - secretName: grafana-tls-secret  # Replace with your TLS secret
-          hosts:
-            - grafana.myclauster218  # Ensure the host matches the one above
