@@ -27,5 +27,5 @@ spec:
       # If your Ingress controller requires SSL, enable TLS
     service:
       type: ClusterIP  # Can be NodePort or LoadBalancer if needed
-      port: 3000         # The port the service will expose externally
+      port: 80         # The port the service will expose externally
       targetPort: 3000 # The port the Grafana pod is actually listening on (default is 3000)
