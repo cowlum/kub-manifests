@@ -15,4 +15,16 @@ spec:
         namespace: flux-system
   values:
     # Define your custom values here (if any)
-    adminPassword: "your-admin-password"
+    adminPassword: "adminpassword"
+    ingress:
+      enabled: true
+      # Define the Ingress host (for example, use your custom domain or cluster IP)
+      hosts: 
+        - grafana.mycluster218  # Replace with your desired domain
+      # Optionally, set the path for the Ingress route (default is '/')
+      path: /
+      # If your Ingress controller requires SSL, enable TLS
+      tls:
+        - secretName: grafana-tls-secret  # Replace with your TLS secret
+          hosts:
+            - grafana.myclauster218  # Ensure the host matches the one above
