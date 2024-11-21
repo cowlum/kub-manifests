@@ -17,6 +17,7 @@ spec:
     # Define your custom values here (if any)
     adminPassword: "adminpassword"
     ingress:
+      ingressClassName: "nginx"
       enabled: true
       # Define the Ingress host (for example, use your custom domain or cluster IP)
       hosts: 
