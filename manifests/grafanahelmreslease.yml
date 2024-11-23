@@ -31,4 +31,4 @@ spec:
       targetPort: 3000 # The port the Grafana pod is actually listening on (default is 3000)
     grafana.ini:
       server:
-        disable_sanatize_html: true
+        disable_sanatize_html: false
