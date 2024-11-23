@@ -30,7 +30,5 @@ spec:
       port: 80         # The port the service will expose externally
       targetPort: 3000 # The port the Grafana pod is actually listening on (default is 3000)
     grafana.ini:
-      server:
-        disable_sanitize_html: true
       panels:  
         disable_sanitize_html: true
