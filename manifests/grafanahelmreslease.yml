@@ -32,5 +32,5 @@ spec:
     grafana.ini:
       server:
         disable_sanitize_html: true
-      panel:  
+      panels:  
         disable_sanitize_html: true
