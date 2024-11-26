@@ -16,6 +16,21 @@ spec:
   values:
     # Define your custom values here (if any)
     adminPassword: "adminpassword"
+    auth.generic_oauth:
+      enabled: true
+      name: Keycloak
+      allow_sign_up: true
+      client_id: grafana  # The client ID from the Keycloak client
+      client_secret: 
+        secretKeyRef:
+          name: keycloak-client-secret  # Secret storing the client secret
+          key: client-secret           # The key where the client secret is stored
+      scopes: openid profile email
+      auth_url: "https://keycloak.mycluster218/realms/<realm-name>/protocol/openid-connect/auth"
+      token_url: "https://keycloak.mycluster218/realms/<realm-name>/protocol/openid-connect/token"
+      api_url: "https://keycloak.mycluster218/realms/<realm-name>/protocol/openid-connect/userinfo"
+      redirect_uri: "https://grafana.mycluster218/login/generic_oauth"
+    # Additional Grafana configurations can go here
     ingress:
       ingressClassName: "nginx"
       enabled: true
