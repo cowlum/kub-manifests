@@ -6,5 +6,5 @@ metadata:
 spec:
   type: "oci"
   interval: 15m
-  url: oci://registry-1.docker.io/bitnamicharts/keycloak
+  url: oci://registry-1.docker.io/bitnamicharts/keycoak
 
