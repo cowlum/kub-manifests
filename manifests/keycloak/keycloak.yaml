@@ -23,6 +23,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: keycloak-postgresql
+  namespace: keycloak
   labels:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-10.16.2
@@ -39,6 +40,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: keycloak-startup
+  namespace: keycloak
   labels:
     helm.sh/chart: keycloak-18.5.0
     app.kubernetes.io/name: keycloak
@@ -65,7 +67,8 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: keycloak-postgresql-headless
+  name: keycloak-postgresql-headless  
+  namespace: keycloak
   labels:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-10.16.2
@@ -97,6 +100,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: keycloak-postgresql
+  namespace: keycloak
   labels:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-10.16.2
@@ -145,6 +149,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: keycloak-http
+  namespace: keycloak
   labels:
     helm.sh/chart: keycloak-18.5.0
     app.kubernetes.io/name: keycloak
@@ -176,6 +181,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: keycloak-postgresql
+  namespace: keycloak
   labels:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-10.16.2
@@ -327,6 +333,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: keycloak
+  namespace: keycloak
   labels:
     helm.sh/chart: keycloak-18.5.0
     app.kubernetes.io/name: keycloak
