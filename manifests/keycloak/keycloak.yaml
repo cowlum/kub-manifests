@@ -46,7 +46,7 @@ spec:
       ingressClassName: "nginx"
       enabled: true
       # Define the Ingress host (for example, use your custom domain or cluster IP)
-      hosts: 
+      host: 
         - keycloak.mycluster218  # Replace with your desired domain
       # Optionally, set the path for the Ingress route (default is '/')
       path: /
