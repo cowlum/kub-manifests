@@ -50,8 +50,8 @@ spec:
         nginx.ingress.kubernetes.io/rewrite-target: /
     persistence:
       enabled: true  # Enable persistence for Keycloak
-      size: 8Gi  # This defines the persistent volume size for Keycloak itself
-    replicaCount: 2  # Set number of Keycloak replicas
+      size: 2Gi  # This defines the persistent volume size for Keycloak itself
+    replicaCount: 1  # Set number of Keycloak replicas
 
     # PostgreSQL Database Configuration
     postgresql:
