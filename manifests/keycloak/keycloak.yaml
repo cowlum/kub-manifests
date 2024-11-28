@@ -1,1 +1,67 @@
 
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: keycloak
+  labels:
+    name: keycloak
+
+
+---
+# 1. HelmRepository Resource - Bitnami Charts Repository
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: bitnami
+  namespace: flux-system  # Namespace for Helm repository
+spec:
+  url: https://charts.bitnami.com/bitnami  # URL of the Bitnami chart repository
+  interval: 10m  # How often Flux will check for updates
+
+---
+
+# 2. HelmRelease Resource - Keycloak with PostgreSQL Database and 2Gi Size
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: keycloak  # Namespace where Keycloak will be deployed
+spec:
+  interval: 10m
+  releaseName: keycloak  # Name of the release
+  chart:
+    spec:
+      interval: 10m
+      chart: keycloak  # The chart name from the Bitnami repo
+      version: "18.0.0"  # Specify the version of the chart
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami  # Reference the Bitnami Helm repository
+        namespace: flux-system  # Flux system namespace where HelmRepository is defined
+  values:
+    keycloak:
+      username: admin
+      password: adminpassword
+    ingress:
+      enabled: true  # Enable ingress to expose Keycloak
+      hostname: keycloak.mycompany.com  # Ingress hostname for Keycloak
+      path: /
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
+    persistence:
+      enabled: true  # Enable persistence for Keycloak
+      size: 1Gi  # This defines the persistent volume size for Keycloak itself
+    replicaCount: 1  # Set number of Keycloak replicas
+
+    # PostgreSQL Database Configuration
+    postgresql:
+      enabled: true  # Enable PostgreSQL
+      postgresqlDatabase: keycloak  # Database name
+      postgresqlUsername: keycloak_user  # Database username
+      postgresqlPassword: keycloak_db_password  # Database password
+      postgresqlPostgresPassword: postgres_password  # Password for the PostgreSQL superuser
+      persistence:
+        enabled: true  # Enable persistence for PostgreSQL
+        size: 1Gi  # Set the size of the PostgreSQL database to 2Gi
+        storageClass: standard  # Storage class for PostgreSQL (default is "standard")
+
