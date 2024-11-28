@@ -15,7 +15,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: keycloak
-  namespace: my-namespace  # Namespace where Keycloak will be deployed
+  namespace: keycloak  # Namespace where Keycloak will be deployed
 spec:
   releaseName: keycloak  # Name of the release
   chart:
