@@ -42,15 +42,6 @@ spec:
     keycloak:
       username: admin
       password: adminpassword
-    ingress:
-      ingressClassName: "nginx"
-      enabled: true
-      # Define the Ingress host (for example, use your custom domain or cluster IP)
-      host: 
-        - keycloak.mycluster218  # Replace with your desired domain
-      # Optionally, set the path for the Ingress route (default is '/')
-      path: /
-      # If your Ingress controller requires SSL, enable TLS
     persistence:
       enabled: true  # Enable persistence for Keycloak
       size: 1Gi  # This defines the persistent volume size for Keycloak itself
@@ -68,3 +59,24 @@ spec:
         size: 1Gi  # Set the size of the PostgreSQL database to 2Gi
         storageClass: standard  # Storage class for PostgreSQL (default is "standard")
 
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak-ingress
+  namespace: keycloak
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: keycloak.mycluster218
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: keycloak
+            port:
+              number: 80
