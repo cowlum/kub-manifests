@@ -1,11 +1,11 @@
 # 1. HelmRepository Resource - Bitnami Charts Repository
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: bitnami
   namespace: flux-system  # Namespace for Helm repository
 spec:
-  url: https://charts.bitname.com/bitnami  # URL of the Bitnami chart repository
+  url: https://charts.bitnami.com/bitnami  # URL of the Bitnami chart repository
   interval: 1h  # How often Flux will check for updates
 
 ---
