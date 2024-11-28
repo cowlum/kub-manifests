@@ -25,7 +25,6 @@ metadata:
     helm.sh/chart: postgresql-10.16.2
     app.kubernetes.io/instance: keycloak
     app.kubernetes.io/managed-by: Helm
-  namespace: keycloak
 type: Opaque
 data:
   postgresql-postgres-password: "Z2Njb2RVSkNUSQ=="
