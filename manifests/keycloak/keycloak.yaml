@@ -8,6 +8,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: keycloak
+  namespace: keycloak
   labels:
     helm.sh/chart: keycloak-18.5.0
     app.kubernetes.io/name: keycloak
