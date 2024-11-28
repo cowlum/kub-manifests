@@ -44,10 +44,13 @@ spec:
       password: adminpassword
     ingress:
       ingressClassName: "nginx"
-      enabled: true  # Enable ingress to expose Keycloak
+      enabled: true
+      # Define the Ingress host (for example, use your custom domain or cluster IP)
       hosts: 
-        - keycloak.mycluster218  # Ingress hostname for Keycloak
+        - keycloak.mycluster218  # Replace with your desired domain
+      # Optionally, set the path for the Ingress route (default is '/')
       path: /
+      # If your Ingress controller requires SSL, enable TLS
     persistence:
       enabled: true  # Enable persistence for Keycloak
       size: 1Gi  # This defines the persistent volume size for Keycloak itself
