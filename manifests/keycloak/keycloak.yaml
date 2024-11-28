@@ -48,8 +48,6 @@ spec:
       hosts: 
          - keycloak.mycluster218  # Ingress hostname for Keycloak
       path: /
-      annotations:
-        nginx.ingress.kubernetes.io/rewrite-target: /
     persistence:
       enabled: true  # Enable persistence for Keycloak
       size: 1Gi  # This defines the persistent volume size for Keycloak itself
