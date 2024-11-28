@@ -30,6 +30,7 @@ spec:
   releaseName: keycloak  # Name of the release
   chart:
     spec:
+      interval: 10m
       chart: keycloak  # The chart name from the Bitnami repo
       version: "18.0.0"  # Specify the version of the chart
       sourceRef:
