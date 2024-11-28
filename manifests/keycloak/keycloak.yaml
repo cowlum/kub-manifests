@@ -43,8 +43,10 @@ spec:
       username: admin
       password: adminpassword
     ingress:
+      ingressClassName: "nginx"
       enabled: true  # Enable ingress to expose Keycloak
-      hostname: keycloak.mycompany.com  # Ingress hostname for Keycloak
+      hosts: 
+         - keycloak.mycluster218  # Ingress hostname for Keycloak
       path: /
       annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /
