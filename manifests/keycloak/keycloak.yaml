@@ -16,7 +16,7 @@ metadata:
   namespace: flux-system  # Namespace for Helm repository
 spec:
   url: https://charts.bitnami.com/bitnami  # URL of the Bitnami chart repository
-  interval: 1h  # How often Flux will check for updates
+  interval: 10m  # How often Flux will check for updates
 
 ---
 
