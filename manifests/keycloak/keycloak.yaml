@@ -101,7 +101,6 @@ metadata:
     app.kubernetes.io/instance: keycloak
     app.kubernetes.io/managed-by: Helm
   annotations:
-  namespace: keycloak
 spec:
   type: ClusterIP
   ports:
@@ -183,7 +182,6 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: primary
   annotations:
-  namespace: keycloak
 spec:
   serviceName: keycloak-postgresql-headless
   replicas: 1
