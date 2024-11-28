@@ -27,6 +27,7 @@ metadata:
   name: keycloak
   namespace: keycloak  # Namespace where Keycloak will be deployed
 spec:
+  interval: 10m
   releaseName: keycloak  # Name of the release
   chart:
     spec:
