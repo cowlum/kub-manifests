@@ -1,0 +1,5 @@
+# manifests/kustomization.yaml
+resources:
+  - ./jenkins
+  - ./keycloak
+  - ./grafana
