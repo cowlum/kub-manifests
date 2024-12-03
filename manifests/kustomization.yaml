@@ -2,4 +2,4 @@
 resources:
   - ./jenkins/deployment.yml
   - ./keycloak/*.yml
-  - ./grafana/
+  - ./grafana/*.yml
