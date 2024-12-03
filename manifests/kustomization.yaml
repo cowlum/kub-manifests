@@ -1,7 +1,0 @@
-cl# manifests/kustomization.yaml
-resources:
-  - ./jenkins/deployment.yml
-  - ./keycloak/keycloak.yml
-  - ./grafana/grafana-helmrepo.yml
-  - ./grafana/grafana-namespace.yml
-  - ./grafana/grafanahelmreslease.yml
