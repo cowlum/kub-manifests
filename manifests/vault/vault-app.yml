@@ -1,1 +1,6 @@
+#  the service account permissions are found in ../auth/ directory
 
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vault
