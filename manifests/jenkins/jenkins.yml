@@ -4,12 +4,12 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: jenkins
-  namespace: cluster-ops
+  namespace: jenkins
   annotations:
     fluxcd.io/automated: "false"
 spec:
   releaseName: jenkins
-  interval: 5m
+  interval: 1m
   chart:
     spec:
       chart: jenkins
@@ -32,47 +32,43 @@ spec:
 #      tag: "v1.2.3"
 #      installPlugins: false
 #      imagePullSecretName: 
-      JCasC:
+#      JCasC:
                 # not sure if the situation requires public-client, all examples have it, and it saves Vault secrets
                 #  Does actually work with client-secret set, but that potentially could be in client-side javascript?
-        configScripts:
-          rbac: |
-            jenkins:
-              authorizationStrategy:
-                roleBased:
-                  roles:
-                    global:
-                      - name: "admin"
-                        description: "Jenkins administrators"
-                        permissions:
-                          - "Overall/Administer"
-                        entries:
-                          - user: "admin"
-                          - user: "michael.dent"
-                          - user: "chunyuam.chen"
-                          - user: "jason.lee"
-                          - user: "gordon.king"
-                          - user: "adam.bailey"
-                      - name: "readonly"
-                        description: "Read-only users"
-                        permissions:
-                          - "Overall/Read"
-                          - "Job/Read"
-                        entries:
-                          - group: "authenticated"
-          keycloaksecurityrealm: |
-            jenkins:
-              securityRealm:
-                keycloak:
-                  keycloakJson: |-
-                    {
-                      "realm": "sso-dev",
-                      "auth-server-url": "https://kc.devstg.nesl.nz/",
-                      "ssl-required": "all",
-                      "resource": "jenkins",
-                      "public-client": true,
-                      "confidential-port": 0
-                    }
+#        configScripts:
+#          rbac: |
+#            jenkins:
+#              authorizationStrategy:
+#                roleBased:
+#                  roles:
+##                    global:
+#                      - name: "admin"
+#                        description: "Jenkins administrators"
+#                        permissions:
+#                          - "Overall/Administer"
+#                        entries:
+#                          - user: "admin"
+#                          - user: "michael.dent"
+#                      - name: "readonly"
+#                        description: "Read-only users"
+#                        permissions:
+#                          - "Overall/Read"
+#                          - "Job/Read"
+#                        entries:
+#                          - group: "authenticated"
+#          keycloaksecurityrealm: |
+#            jenkins:
+#              securityRealm:
+#                keycloak:
+#                  keycloakJson: |-
+#                    {
+#                      "realm": "sso-dev",
+#                      "auth-server-url": "https://kc.devstg.nesl.nz/",
+#                      "ssl-required": "all",
+#                      "resource": "jenkins",
+#                      "public-client": true,
+#                      "confidential-port": 0
+#                    }
       additionalPlugins:
         - keycloak:2.3.2
         - role-strategy:689.v731678c3e0eb_   # RBAC
@@ -86,24 +82,24 @@ spec:
         ingressClassName: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-prod
-        hostName: jenkins.devstg.nesl.nz
-        tls:
-          - secretName: jenkins.devstg.nesl.nz-tls
-            hosts:
-              - jenkins.devstg.nesl.nz
-      resources:
-        requests:
-          cpu: "50m"
-          memory: "1120Mi"
-        limits:
-          memory: "4096Mi"  # default
-    agent:
-      resources:
-        requests:
-          cpu: "256m"
-          memory: "1536Mi"
-        limits:
-          memory: "4096Mi"
+        hostName: jenkins.mycluster218
+#        tls:
+#          - secretName: jenkins.devstg.nesl.nz-tls
+#            hosts:
+#              - jenkins.devstg.nesl.nz
+#      resources:
+#        requests:
+#          cpu: "50m"
+#          memory: "1120Mi"
+#        limits:
+#          memory: "1139Mi"  # default
+#    agent:
+#      resources:
+#        requests:
+#          cpu: "256m"
+#          memory: "1536Mi"
+#        limits:
+#          memory: "4096Mi"
     # backups:
     # prometheus
     # serviceAccountAgent
@@ -126,7 +122,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-jenkins-data
-  namespace: cluster-ops
+  namespace: jenkins
 spec:
   accessModes:
     - ReadWriteOnce
@@ -134,7 +130,7 @@ spec:
   volumeMode: Filesystem
   resources:
     requests:
-      storage: 2Gi
+      storage: 1Gi
 #---
 #apiVersion: velero.io/v1
 #kind: Schedule
