@@ -1,4 +1,10 @@
 #  the service account permissions are found in ../auth/ directory
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins
+
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
