@@ -80,7 +80,7 @@ spec:
     ui:               # create a Service entry for the UI
       enabled: false   # default false - can just port-forward to the server pod via Lens etc
     csi:              # secrets-store-csi-driver-provider-vault
-      enabled: true   # default false
+      enabled: flase   # default false
 ---
 #apiVersion: velero.io/v1
 #kind: Schedule
