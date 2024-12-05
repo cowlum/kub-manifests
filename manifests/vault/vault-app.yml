@@ -68,7 +68,6 @@ spec:
         # if not using Consul, use local storage
         enabled: true
         size: 1Gi   # default 10Gi
-        storageClass: dobs-csi-retain
       auditStorage:
         size: 1Gi   # default 10Gi
       ha:
