@@ -46,7 +46,7 @@ spec:
             path = "/vault/data"
           }
           seal "transit" {
-            address            = "https://vault.mycluster218:8243"
+            address            = "https://localhost:8243"
             // token              = set through env var
             disable_renewal    = "false"
             // Key configuration
