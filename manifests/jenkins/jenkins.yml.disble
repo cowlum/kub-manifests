@@ -75,13 +75,13 @@ spec:
 #                      "public-client": true,
 #                      "confidential-port": 0
 #                    }
-      additionalPlugins:
-        - keycloak:2.3.2
-        - role-strategy:689.v731678c3e0eb_   # RBAC
-        - slack
-        - global-slack-notifier
-        - kubernetes-cli
-        - github
+#      additionalPlugins:
+#        - keycloak:2.3.2
+#        - role-strategy:689.v731678c3e0eb_   # RBAC
+#        - slack
+#        - global-slack-notifier
+#        - kubernetes-cli
+#        - github
       ingress:
         enabled: true
         apiVersion: "networking.k8s.io/v1"
