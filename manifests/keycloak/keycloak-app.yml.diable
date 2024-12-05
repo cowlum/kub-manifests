@@ -1,0 +1,90 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: cluster-ops
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: keycloak
+  interval: 5m
+  chart:
+    spec:
+      chart: keycloak
+      version: 15.1.7  # app 21.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 10m
+  values:
+    extraVolumeMounts:
+    - name: secrets-store-inline
+      mountPath: "/mnt/secrets-store"
+      readOnly: true
+    extraVolumes:
+    - name: secrets-store-inline
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: "keycloak-spc"
+    externalDatabase:
+      host: private-nsqr-dev-postgresql-sgp1-001-do-user-4497369-0.b.db.ondigitalocean.com
+      port: 25060
+      user: keycloak
+      database: keycloak
+      existingSecret: keycloak-db-creds
+    postgresql:
+      enabled: false
+    replicaCount: 1
+    resources:
+      requests:
+        cpu: 50m
+        memory: 496Mi
+      limits:
+        cpu: 500m
+        memory: 1Gi
+    service:
+      type: ClusterIP
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hostname: keycloak.nsqr.info
+      tls: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+    metrics:
+      enabled: false   # default false
+    logging:
+      output: default  # alternative is JSON
+      # needs new version of keycloak
+      level: INFO     # FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL, OFF
+---
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: keycloak-spc
+  namespace: cluster-ops
+spec:
+  # need this to replicate secret into k8s secrets. This defines the format of the k8s secret
+  secretObjects:
+    - type: Opaque
+      secretName: keycloak-db-creds
+      data:
+        - key: db-user
+          objectName: username
+        - key: db-password
+          objectName: password
+  provider: vault
+  parameters:
+    vaultAddress: "http://vault.vault:8200"
+    roleName: ops-keycloak
+    objects: |
+        - objectName: username
+          secretPath: secret/data/ops/keycloak-dbcreds
+          secretKey: username
+        - objectName: password
+          secretPath: secret/data/ops/keycloak-dbcreds
+          secretKey: password
