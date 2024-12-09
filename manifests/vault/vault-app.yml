@@ -46,7 +46,7 @@ spec:
             path = "/vault/data"
           }
           seal "transit" {
-            address            = "https://192.168.0.225:8200"
+            address            = "https://192.168.0.225:8243"
             // token              = set through env var
             disable_renewal    = "false"
             // Key configuration
