@@ -47,7 +47,7 @@ spec:
           }
           seal "transit" {
             address            = "https://192.168.0.225:8243"
-            token              = "hvs.CAESINM2IyKeYeFlvvxhFNZzWQJax1Lo2BUt8dYfPq5-FT43Gh4KHGh2cy5HVDFONE1SRTBTZUlLSTJEbVdZTEJTR2U"
+            //token              = 
             disable_renewal    = "false"
             // Key configuration
             key_name           = "autounseal"
